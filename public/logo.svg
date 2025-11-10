@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="48" viewBox="0 0 220 48" fill="none">
+  <rect width="220" height="48" rx="12" fill="white"/>
+  <g>
+    <path d="M16 32C12.6863 32 10 29.3137 10 26V22C10 18.6863 12.6863 16 16 16H28C31.3137 16 34 18.6863 34 22V26C34 29.3137 31.3137 32 28 32H16Z" fill="#1E90FF"/>
+    <path d="M16 20H28V22H16V20Z" fill="white"/>
+    <circle cx="18.5" cy="28.5" r="2.5" fill="white"/>
+    <circle cx="25.5" cy="28.5" r="2.5" fill="white"/>
+  </g>
+  <text x="44" y="31" font-family="Poppins, Arial, sans-serif" font-weight="700" font-size="20" fill="#1E90FF">Sewa</text>
+  <text x="96" y="31" font-family="Poppins, Arial, sans-serif" font-weight="800" font-size="20" fill="#1E90FF">Mobilin</text>
+</svg>
+
