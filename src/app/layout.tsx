@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Poppins, Inter } from "next/font/google";
 import "./globals.css";
+import Head from "next/head";
+import { GA_TRACKING_ID } from "@/lib/gtag";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -18,8 +20,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "SewaMobilin – Sewa Mobil Tanpa Ribet",
-  description:
-    "Sewa mobil online cepat, mudah, dan aman. Armada lengkap, harga transparan, dukungan 24 jam.",
+  description: "Sewa mobil online cepat, mudah, dan aman. Armada lengkap, harga transparan, dukungan 24 jam.",
   icons: { icon: "/favicon.ico" },
 };
 
@@ -30,9 +31,23 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="id">
-      <body className={`${poppins.variable} ${inter.variable} antialiased`}>
-        {children}
-      </body>
+      <Head>
+        {/* Google Analytics */}
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`} />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', '${GA_TRACKING_ID}', {
+                page_path: window.location.pathname,
+              });
+            `,
+          }}
+        />
+      </Head>
+      <body className={`${poppins.variable} ${inter.variable} antialiased`}>{children}</body>
     </html>
   );
 }

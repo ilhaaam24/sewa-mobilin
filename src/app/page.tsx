@@ -2,10 +2,36 @@
 import React, { useState, useEffect } from "react";
 import { Car, Shield, Clock, DollarSign, Star, Phone, Mail, MapPin, ChevronRight, Menu, X } from "lucide-react";
 import Image from "next/image";
+import { event as gaEvent } from "../lib/gtag";
 
 const Home = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+
+  const trackAndScroll = (label: string, id: string) => {
+    try {
+      gaEvent({
+        action: "cta_click",
+        category: "engagement",
+        label,
+        value: 1,
+      });
+    } catch {}
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+    setIsMenuOpen(false);
+  };
+
+  // kept for potential non-tracking links usage
+  // const scrollToId = (id: string) => {
+  //   const el = document.getElementById(id);
+  //   if (el) {
+  //     el.scrollIntoView({ behavior: "smooth", block: "start" });
+  //   }
+  //   setIsMenuOpen(false);
+  // };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -79,8 +105,12 @@ const Home = () => {
           </h1>
           <p className="text-xl md:text-2xl text-gray-100 mb-8 max-w-3xl mx-auto">Temukan mobil terbaik sesuai kebutuhanmu dan pesan langsung secara online — cepat, mudah, dan aman.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold py-4 px-8 rounded-lg text-lg transition-all transform hover:scale-105 shadow-xl">Pesan Sekarang</button>
-            <button className="bg-transparent border-2 border-white hover:bg-white hover:text-blue-600 text-white font-bold py-4 px-8 rounded-lg text-lg transition-all">Lihat Armada</button>
+            <button onClick={() => trackAndScroll("hero_pesan", "kontak")} className="bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold py-4 px-8 rounded-lg text-lg transition-all transform hover:scale-105 shadow-xl">
+              Pesan Sekarang
+            </button>
+            <button onClick={() => trackAndScroll("hero_lihat_armada", "armada")} className="bg-transparent border-2 border-white hover:bg-white hover:text-blue-600 text-white font-bold py-4 px-8 rounded-lg text-lg transition-all">
+              Lihat Armada
+            </button>
           </div>
         </div>
         <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
@@ -124,7 +154,7 @@ const Home = () => {
               { step: "03", title: "Siap Berkendara", desc: "Terima konfirmasi dan siap berkendara!" },
             ].map((item, index) => (
               <div key={index} className="text-center relative">
-                <div className="bg-gradient-to-br from-blue-600 to-blue-400 text-white text-4xl font-bold w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-xl">{item.step}</div>
+                <div className="bg-linear-to-br from-blue-600 to-blue-400 text-white text-4xl font-bold w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-xl">{item.step}</div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-3">{item.title}</h3>
                 <p className="text-gray-600 text-lg">{item.desc}</p>
                 {index < 2 && (
@@ -137,7 +167,9 @@ const Home = () => {
           </div>
 
           <div className="text-center mt-12">
-            <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-12 rounded-lg text-lg transition-all transform hover:scale-105 shadow-xl">🚀 Mulai Sekarang</button>
+            <button onClick={() => trackAndScroll("how_it_works_mulai", "kontak")} className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-12 rounded-lg text-lg transition-all transform hover:scale-105 shadow-xl">
+              🚀 Mulai Sekarang
+            </button>
           </div>
         </div>
       </section>
@@ -150,7 +182,7 @@ const Home = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {cars.map((car, index) => (
               <div key={index} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all transform hover:-translate-y-2">
-                <div className="bg-gradient-to-br from-blue-100 to-blue-50 h-48 flex items-center justify-center text-7xl">{car.image}</div>
+                <div className="bg-linear-to-br from-blue-100 to-blue-50 h-48 flex items-center justify-center text-7xl">{car.image}</div>
                 <div className="p-6">
                   <h3 className="text-xl font-bold text-gray-900 mb-2">{car.name}</h3>
                   <p className="text-gray-600 mb-4">{car.desc}</p>
@@ -159,7 +191,9 @@ const Home = () => {
                       {car.price}
                       <span className="text-sm text-gray-500">/hari</span>
                     </span>
-                    <button className="bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold py-2 px-4 rounded-lg transition-all">Pesan</button>
+                    <button onClick={() => trackAndScroll(`fleet_pesan_${car.name}`, "kontak")} className="bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold py-2 px-4 rounded-lg transition-all">
+                      Pesan
+                    </button>
                   </div>
                 </div>
               </div>
@@ -167,7 +201,9 @@ const Home = () => {
           </div>
 
           <div className="text-center mt-12">
-            <button className="bg-white border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white font-bold py-3 px-8 rounded-lg text-lg transition-all">Lihat Semua Armada</button>
+            <button onClick={() => trackAndScroll("fleet_lihat_semua", "armada")} className="bg-white border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white font-bold py-3 px-8 rounded-lg text-lg transition-all">
+              Lihat Semua Armada
+            </button>
           </div>
         </div>
       </section>
@@ -179,7 +215,7 @@ const Home = () => {
 
           <div className="grid md:grid-cols-3 gap-8">
             {testimonials.map((item, index) => (
-              <div key={index} className="bg-gradient-to-br from-blue-50 to-white p-8 rounded-xl shadow-lg">
+              <div key={index} className="bg-linear-to-br from-blue-50 to-white p-8 rounded-xl shadow-lg">
                 <div className="flex mb-4">
                   {[...Array(item.rating)].map((_, i) => (
                     <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
@@ -200,11 +236,13 @@ const Home = () => {
       </section>
 
       {/* CTA Final Section */}
-      <section className="py-20 bg-gradient-to-r from-blue-600 to-blue-400">
+      <section className="py-20 bg-linear-to-r from-blue-600 to-blue-400">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Siap Jalan Sekarang?</h2>
           <p className="text-xl text-blue-100 mb-8">Temukan mobil impianmu dan nikmati pengalaman sewa tanpa stres.</p>
-          <button className="bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold py-4 px-12 rounded-lg text-xl transition-all transform hover:scale-105 shadow-xl">🚗 Pesan Mobil Sekarang</button>
+          <button onClick={() => trackAndScroll("final_cta_pesan", "kontak")} className="bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold py-4 px-12 rounded-lg text-xl transition-all transform hover:scale-105 shadow-xl">
+            🚗 Pesan Mobil Sekarang
+          </button>
         </div>
       </section>
 
