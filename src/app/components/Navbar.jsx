@@ -1,73 +1,72 @@
 "use client";
-import Link from "next/link";
-import { useState } from "react";
-import { CgMenuCheese } from "react-icons/cg";
-import { GrClose } from "react-icons/gr";
-import Image from "next/image";
-import MyBtn from "./MyButton";
+import { Menu, X } from "lucide-react";
+import { useState, useEffect } from "react";
 
 export const Navbar = () => {
-  const [isOpen, setOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
-  const toggleNavbar = () => {
-    setOpen(!isOpen);
-  };
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const navLinks = [
     {
-			name: "Home",
-			link: "/#home",
+      name: "Home",
+      link: "/#home",
     },
     {
-			name: "Armada",
-			link: "/#armada",
+      name: "Armada",
+      link: "/armada",
     },
     {
-			name: "Cara Kerja",
-			link: "/#cara-kerja",
+      name: "Cara Kerja",
+      link: "/#cara-kerja",
     },
     {
-			name: "Testimoni",
-			link: "/#testimoni",
+      name: "Testimoni",
+      link: "/#testimoni",
     },
   ];
 
   return (
-    <nav className="bg-white shadow-2xl sticky top-0 z-10 shadow-cyan-200/50 flex flex-col lg:flex-row lg:justify-center items-center rounded-md justify-around my-auto p-2 md:py-3 md:m-3">
-      <div className="flex flex-row justify-between w-full">
-        <div className="w-36 md:w-52 my-auto">
-          <Link href="/">
-            <Image src={"/logo.svg"} alt="logo" width={300} height={80} />
-          </Link>
-        </div>
-        <div className="visible my-auto lg:invisible p-2 text-xl text-gray-800 rounded-sm hover:bg-gray-100 active:bg-turbo-gray-100 cursor-pointer" onClick={toggleNavbar}>
-          {!isOpen ? <CgMenuCheese /> : <GrClose />}
-        </div>
-      </div>
-      <div className={`${!isOpen ? "hidden" : "z-20"} flex flex-col lg:hidden ml-1 md:justify-between my-8 md:my-10 mx-auto space-y-4 font-semibold`}>
-        {navLinks.map((item) => (
-          <div key={item.name} className="hover:underline">
-            <Link href={item.link}>{item.name}</Link>
+    <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? "bg-white shadow-lg" : "bg-transparent"}`}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-20">
+          <div className="flex items-center space-x-2">
+            <span className={`text-2xl font-bold ${scrolled ? "text-gray-900" : "text-white"}`}>SewaMobilin</span>
           </div>
-        ))}
-		<div className="block lg:hidden ">
-			<Link href="/#pesan" className="">
-				<MyBtn textContent={"Pesan Sekarang"} />
-          </Link>
+
+          <div className="hidden md:flex space-x-16">
+            {navLinks.map((item) => (
+              <a key={item.name} href={`${item.link}`} className={`font-medium text-base transition-colors ${scrolled ? "text-gray-700 hover:text-blue-600" : "text-white hover:text-yellow-300"}`}>
+                {item.name}
+              </a>
+            ))}
+          </div>
+
+          <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="md:hidden">
+            {isMenuOpen ? <X className={scrolled ? "text-gray-900" : "text-white"} /> : <Menu className={scrolled ? "text-gray-900" : "text-white"} />}
+          </button>
         </div>
       </div>
-      <div className="hidden lg:flex flex-row justify-around space-y-0 space-x-6 lg:space-x-10 font-semibold">
-        {navLinks.map((item) => (
-          <div key={item.name} className="hover:underline my-auto">
-            <Link href={item.link}>{item.name}</Link>
+
+      {/* Mobile Menu */}
+      {isMenuOpen && (
+        <div className="md:hidden bg-white shadow-lg">
+          <div className="px-4 py-4 space-y-3">
+            {["Home", "Armada", "Tentang", "Kontak"].map((item) => (
+              <a key={item} href={`#${item.toLowerCase()}`} className="block text-gray-700 hover:text-blue-600 font-medium">
+                {item}
+              </a>
+            ))}
           </div>
-        ))}
-      </div>
-      <div className="hidden lg:flex ml-6">
-		<Link href="/#pesan" className="">
-			<MyBtn textContent={"Pesan Sekarang"} />
-        </Link>
-      </div>
+        </div>
+      )}
     </nav>
   );
 };

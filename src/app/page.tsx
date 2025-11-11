@@ -1,13 +1,12 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import { Car, Shield, Clock, DollarSign, Star, Phone, Mail, MapPin, ChevronRight, Menu, X } from "lucide-react";
+import { Car, Shield, Clock, DollarSign, Star, Phone, Mail, MapPin, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import { event as gaEvent } from "../lib/gtag";
+import { Navbar } from "../app/components/Navbar";
+import { FaWhatsapp } from "react-icons/fa";
+import Link from "next/link";
 
 const Home = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
   const trackAndScroll = (label: string, id: string) => {
     try {
       gaEvent({
@@ -21,28 +20,9 @@ const Home = () => {
     if (el) {
       el.scrollIntoView({ behavior: "smooth", block: "start" });
     }
-    setIsMenuOpen(false);
   };
 
-  // kept for potential non-tracking links usage
-  // const scrollToId = (id: string) => {
-  //   const el = document.getElementById(id);
-  //   if (el) {
-  //     el.scrollIntoView({ behavior: "smooth", block: "start" });
-  //   }
-  //   setIsMenuOpen(false);
-  // };
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   const cars = [
-    { name: "Toyota Avanza", price: "Rp 400.000", image: "/assets/armada-1.jpg", desc: "Populer untuk keluarga" },
     { name: "Honda Brio", price: "Rp 300.000", image: "/assets/armada-2.jpg", desc: "Hemat & lincah untuk kota" },
     { name: "Innova Reborn", price: "Rp 550.000", image: "/assets/armada-3.jpg", desc: "Nyaman untuk keluarga" },
     { name: "Pajero Sport", price: "Rp 800.000", image: "/assets/armada-4.jpg", desc: "Siap untuk perjalanan jauh" },
@@ -56,42 +36,7 @@ const Home = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Navigation */}
-      <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? "bg-white shadow-lg" : "bg-transparent"}`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20">
-            <div className="flex items-center space-x-2">
-              <span className={`text-2xl font-bold ${scrolled ? "text-gray-900" : "text-white"}`}>SewaMobilin</span>
-            </div>
-
-            <div className="hidden md:flex space-x-16">
-              {["Home", "Armada", "Tentang", "Kontak"].map((item) => (
-                <a key={item} href={`#${item.toLowerCase()}`} className={`font-medium text-base transition-colors ${scrolled ? "text-gray-700 hover:text-blue-600" : "text-white hover:text-yellow-300"}`}>
-                  {item}
-                </a>
-              ))}
-            </div>
-
-            <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="md:hidden">
-              {isMenuOpen ? <X className={scrolled ? "text-gray-900" : "text-white"} /> : <Menu className={scrolled ? "text-gray-900" : "text-white"} />}
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className="md:hidden bg-white shadow-lg">
-            <div className="px-4 py-4 space-y-3">
-              {["Home", "Armada", "Tentang", "Kontak"].map((item) => (
-                <a key={item} href={`#${item.toLowerCase()}`} className="block text-gray-700 hover:text-blue-600 font-medium">
-                  {item}
-                </a>
-              ))}
-            </div>
-          </div>
-        )}
-      </nav>
-
+      <Navbar />
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <Image src={"/assets/hero-image.jpg"} alt="Hero Image" fill priority className="absolute inset-0 object-cover" />
@@ -174,15 +119,15 @@ const Home = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl md:text-5xl font-bold text-center text-gray-900 mb-16">Pilihan Mobil Terpopuler</h2>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {cars.map((car, index) => (
-              <div key={index} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all transform hover:-translate-y-2">
+              <div key={index} className="bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-md transition-all transform hover:-translate-y-1">
                 <Image src={car.image} alt={car.name} width={200} height={150} className="bg-linear-to-br from-blue-100 to-blue-50 h-60 w-full flex items-center justify-center text-7xl object-cover " />
                 <div className="p-6">
                   <h3 className="text-xl font-bold text-gray-900 mb-2">{car.name}</h3>
                   <p className="text-gray-600 mb-4">{car.desc}</p>
                   <div className="flex justify-between items-center">
-                    <span className="text-2xl font-bold text-blue-600">
+                    <span className="text-sm md:text-2xl font-bold text-blue-600">
                       {car.price}
                       <span className="text-sm text-gray-500">/hari</span>
                     </span>
@@ -196,9 +141,11 @@ const Home = () => {
           </div>
 
           <div className="text-center mt-12">
-            <button onClick={() => trackAndScroll("fleet_lihat_semua", "armada")} className="bg-white border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white font-bold py-3 px-8 rounded-lg text-lg transition-all">
-              Lihat Semua Armada
-            </button>
+            <Link href="/armada">
+              <button onClick={() => trackAndScroll("fleet_lihat_semua", "armada")} className="bg-white border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white font-bold py-3 px-8 rounded-lg text-lg transition-all">
+                Lihat Semua Armada
+              </button>
+            </Link>
           </div>
         </div>
       </section>
@@ -236,7 +183,7 @@ const Home = () => {
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Siap Jalan Sekarang?</h2>
           <p className="text-xl text-blue-100 mb-8">Temukan mobil impianmu dan nikmati pengalaman sewa tanpa stres.</p>
           <button onClick={() => trackAndScroll("final_cta_pesan", "kontak")} className="bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold py-4 px-12 rounded-lg text-xl transition-all transform hover:scale-105 shadow-xl">
-            🚗 Pesan Mobil Sekarang
+            <FaWhatsapp size={32} className=" inline-block mr-2" /> Pesan Mobil Sekarang
           </button>
         </div>
       </section>
@@ -301,22 +248,6 @@ const Home = () => {
           </div>
         </div>
       </footer>
-
-      <style jsx>{`
-        @keyframes fade-in {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        .animate-fade-in {
-          animation: fade-in 1s ease-out;
-        }
-      `}</style>
     </div>
   );
 };
