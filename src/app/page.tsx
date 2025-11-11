@@ -42,10 +42,10 @@ const Home = () => {
   }, []);
 
   const cars = [
-    { name: "Toyota Avanza", price: "Rp 400.000", image: "🚙", desc: "Populer untuk keluarga" },
-    { name: "Honda Brio", price: "Rp 300.000", image: "🚗", desc: "Hemat & lincah untuk kota" },
-    { name: "Innova Reborn", price: "Rp 550.000", image: "🚐", desc: "Nyaman untuk keluarga" },
-    { name: "Pajero Sport", price: "Rp 800.000", image: "🚙", desc: "Siap untuk perjalanan jauh" },
+    { name: "Toyota Avanza", price: "Rp 400.000", image: "/assets/armada-1.jpg", desc: "Populer untuk keluarga" },
+    { name: "Honda Brio", price: "Rp 300.000", image: "/assets/armada-2.jpg", desc: "Hemat & lincah untuk kota" },
+    { name: "Innova Reborn", price: "Rp 550.000", image: "/assets/armada-3.jpg", desc: "Nyaman untuk keluarga" },
+    { name: "Pajero Sport", price: "Rp 800.000", image: "/assets/armada-4.jpg", desc: "Siap untuk perjalanan jauh" },
   ];
 
   const testimonials = [
@@ -61,13 +61,12 @@ const Home = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             <div className="flex items-center space-x-2">
-              <Car className={`w-8 h-8 ${scrolled ? "text-blue-600" : "text-white"}`} />
               <span className={`text-2xl font-bold ${scrolled ? "text-gray-900" : "text-white"}`}>SewaMobilin</span>
             </div>
 
-            <div className="hidden md:flex space-x-8">
+            <div className="hidden md:flex space-x-16">
               {["Home", "Armada", "Tentang", "Kontak"].map((item) => (
-                <a key={item} href={`#${item.toLowerCase()}`} className={`font-medium transition-colors ${scrolled ? "text-gray-700 hover:text-blue-600" : "text-white hover:text-yellow-300"}`}>
+                <a key={item} href={`#${item.toLowerCase()}`} className={`font-medium text-base transition-colors ${scrolled ? "text-gray-700 hover:text-blue-600" : "text-white hover:text-yellow-300"}`}>
                   {item}
                 </a>
               ))}
@@ -96,14 +95,14 @@ const Home = () => {
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <Image src={"/assets/hero-image.jpg"} alt="Hero Image" fill priority className="absolute inset-0 object-cover" />
-        <div className="absolute inset-0 bg-linear-to-t from-blue-500/40 via-blue-500/20 to-blue-300/20" />
+        <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/50 to-black/20" />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 animate-fade-in">
             Sewa Mobil Tanpa Ribet,
             <br />
             Kapan Pun, di Mana Pun.
           </h1>
-          <p className="text-xl md:text-2xl text-gray-100 mb-8 max-w-3xl mx-auto">Temukan mobil terbaik sesuai kebutuhanmu dan pesan langsung secara online — cepat, mudah, dan aman.</p>
+          <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">Temukan mobil terbaik sesuai kebutuhanmu dan pesan langsung secara online — cepat, mudah, dan aman.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button onClick={() => trackAndScroll("hero_pesan", "kontak")} className="bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold py-4 px-8 rounded-lg text-lg transition-all transform hover:scale-105 shadow-xl">
               Pesan Sekarang
@@ -130,7 +129,7 @@ const Home = () => {
               { icon: Shield, title: "Asuransi & Dukungan 24 Jam", desc: "Berkendara tanpa khawatir." },
               { icon: DollarSign, title: "Harga Transparan", desc: "Tanpa biaya tersembunyi, semua jelas di awal." },
             ].map((item, index) => (
-              <div key={index} className="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-2">
+              <div key={index} className="bg-white p-8 rounded-xl shadow-xs hover:shadow-md transition-all transform hover:-translate-y-2  flex flex-col items-center text-center">
                 <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
                   <item.icon className="w-8 h-8 text-blue-600" />
                 </div>
@@ -149,9 +148,9 @@ const Home = () => {
 
           <div className="grid md:grid-cols-3 gap-8">
             {[
-              { step: "01", title: "Pilih Mobil", desc: "Pilih mobil dan tanggal sewa sesuai kebutuhanmu." },
-              { step: "02", title: "Isi Data", desc: "Isi data pemesanan dan metode pembayaran." },
-              { step: "03", title: "Siap Berkendara", desc: "Terima konfirmasi dan siap berkendara!" },
+              { step: "1", title: "Pilih Mobil", desc: "Pilih mobil dan tanggal sewa sesuai kebutuhanmu." },
+              { step: "2", title: "Isi Data", desc: "Isi data pemesanan dan metode pembayaran." },
+              { step: "3", title: "Siap Berkendara", desc: "Terima konfirmasi dan siap berkendara!" },
             ].map((item, index) => (
               <div key={index} className="text-center relative">
                 <div className="bg-linear-to-br from-blue-600 to-blue-400 text-white text-4xl font-bold w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-xl">{item.step}</div>
@@ -182,7 +181,7 @@ const Home = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {cars.map((car, index) => (
               <div key={index} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all transform hover:-translate-y-2">
-                <div className="bg-linear-to-br from-blue-100 to-blue-50 h-48 flex items-center justify-center text-7xl">{car.image}</div>
+                <Image src={car.image} alt={car.name} width={200} height={150} className="bg-linear-to-br from-blue-100 to-blue-50 h-60 w-full flex items-center justify-center text-7xl object-cover " />
                 <div className="p-6">
                   <h3 className="text-xl font-bold text-gray-900 mb-2">{car.name}</h3>
                   <p className="text-gray-600 mb-4">{car.desc}</p>
