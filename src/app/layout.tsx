@@ -1,8 +1,6 @@
-import type { Metadata } from "next";
+import Script from "next/script";
 import { Poppins, Inter } from "next/font/google";
 import "./globals.css";
-import Head from "next/head";
-import { GA_TRACKING_ID } from "@/lib/gtag";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -18,35 +16,27 @@ const inter = Inter({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  title: "SewaMobilin – Sewa Mobil Tanpa Ribet",
-  description: "Sewa mobil online cepat, mudah, dan aman. Armada lengkap, harga transparan, dukungan 24 jam.",
-  icons: { icon: "/favicon.ico" },
-};
-
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="id">
-      <Head>
-        {/* Google Analytics */}
-        <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`} />
-        <script
+      <head>
+        {/* GA Script */}
+        <Script strategy="afterInteractive" src={`https://www.googletagmanager.com/gtag/js?id=G-N3T2VJ9MZM`} />
+        <Script
+          id="gtag-init"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', '${GA_TRACKING_ID}', {
+              gtag('config', 'G-N3T2VJ9MZM', {
                 page_path: window.location.pathname,
               });
             `,
           }}
         />
-      </Head>
+      </head>
       <body className={`${poppins.variable} ${inter.variable} antialiased`}>{children}</body>
     </html>
   );

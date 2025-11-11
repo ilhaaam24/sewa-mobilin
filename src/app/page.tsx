@@ -97,11 +97,7 @@ const Home = () => {
         <Image src={"/assets/hero-image.jpg"} alt="Hero Image" fill priority className="absolute inset-0 object-cover" />
         <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/50 to-black/20" />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 animate-fade-in">
-            Sewa Mobil Tanpa Ribet,
-            <br />
-            Kapan Pun, di Mana Pun.
-          </h1>
+          <h1 className="text-3xl md:text-5xl lg:text-7xl font-bold text-white mb-6 animate-fade-in max-w-3xl md:max-w-3xl">Sewa Mobil Tanpa Ribet, Kapan Pun, di Mana Pun.</h1>
           <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">Temukan mobil terbaik sesuai kebutuhanmu dan pesan langsung secara online — cepat, mudah, dan aman.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button onClick={() => trackAndScroll("hero_pesan", "kontak")} className="bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold py-4 px-8 rounded-lg text-lg transition-all transform hover:scale-105 shadow-xl">
