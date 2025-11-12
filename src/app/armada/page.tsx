@@ -1,28 +1,29 @@
 "use client";
 import { Car, Users, Fuel, Settings, ChevronRight, Filter, Search } from "lucide-react";
-import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
+import { Navbar } from "../components/Navbar";
+import { FaWhatsapp } from "react-icons/fa";
 
 const ArmadaPage = () => {
   const [selectedCategory, setSelectedCategory] = useState("Semua");
   const [searchQuery, setSearchQuery] = useState("");
 
   const cars = [
-    { name: "Honda Brio", price: "Rp 300.000", category: "City Car", seats: 5, transmission: "Manual", fuel: "Bensin", image: "🚗", desc: "Hemat & lincah untuk kota" },
-    { name: "Toyota Agya", price: "Rp 280.000", category: "City Car", seats: 5, transmission: "Manual", fuel: "Bensin", image: "🚗", desc: "Ekonomis untuk perkotaan" },
-    { name: "Daihatsu Ayla", price: "Rp 275.000", category: "City Car", seats: 5, transmission: "Manual", fuel: "Bensin", image: "🚗", desc: "Irit dan praktis" },
-    { name: "Honda Jazz", price: "Rp 450.000", category: "Hatchback", seats: 5, transmission: "Automatic", fuel: "Bensin", image: "🚙", desc: "Stylish dan bertenaga" },
-    { name: "Toyota Yaris", price: "Rp 420.000", category: "Hatchback", seats: 5, transmission: "Automatic", fuel: "Bensin", image: "🚙", desc: "Sporty dan modern" },
-    { name: "Honda Mobilio", price: "Rp 400.000", category: "MPV", seats: 7, transmission: "Manual", fuel: "Bensin", image: "🚐", desc: "Lega untuk keluarga" },
-    { name: "Toyota Avanza", price: "Rp 450.000", category: "MPV", seats: 7, transmission: "Manual", fuel: "Bensin", image: "🚐", desc: "MPV terpopuler Indonesia" },
-    { name: "Daihatsu Xenia", price: "Rp 420.000", category: "MPV", seats: 7, transmission: "Manual", fuel: "Bensin", image: "🚐", desc: "Andalan keluarga Indonesia" },
-    { name: "Toyota Innova Reborn", price: "Rp 550.000", category: "MPV", seats: 7, transmission: "Automatic", fuel: "Diesel", image: "🚐", desc: "Nyaman untuk perjalanan jauh" },
-    { name: "Mitsubishi Xpander", price: "Rp 480.000", category: "MPV", seats: 7, transmission: "Automatic", fuel: "Bensin", image: "🚐", desc: "Modern dan lapang" },
-    { name: "Honda CR-V", price: "Rp 700.000", category: "SUV", seats: 7, transmission: "Automatic", fuel: "Bensin", image: "🚙", desc: "SUV premium dan elegan" },
-    { name: "Toyota Fortuner", price: "Rp 750.000", category: "SUV", seats: 7, transmission: "Automatic", fuel: "Diesel", image: "🚙", desc: "Tangguh di segala medan" },
-    { name: "Mitsubishi Pajero Sport", price: "Rp 800.000", category: "SUV", seats: 7, transmission: "Automatic", fuel: "Diesel", image: "🚙", desc: "Siap untuk petualangan" },
-    { name: "Toyota Alphard", price: "Rp 1.500.000", category: "Luxury", seats: 7, transmission: "Automatic", fuel: "Bensin", image: "🚐", desc: "Kenyamanan kelas bisnis" },
-    { name: "Toyota Hiace", price: "Rp 900.000", category: "Van", seats: 14, transmission: "Manual", fuel: "Diesel", image: "🚐", desc: "Ideal untuk rombongan" },
+    { name: "Honda Brio", price: "Rp 300.000", category: "City Car", seats: 5, transmission: "Manual", fuel: "Bensin", image: "/assets/brio.jpg", desc: "Hemat & lincah untuk kota" },
+    { name: "Toyota Agya", price: "Rp 280.000", category: "City Car", seats: 5, transmission: "Manual", fuel: "Bensin", image: "/assets/agya.jpg", desc: "Ekonomis untuk perkotaan" },
+    { name: "Honda Jazz", price: "Rp 450.000", category: "Hatchback", seats: 5, transmission: "Automatic", fuel: "Bensin", image: "/assets/jazz.jpg", desc: "Stylish dan bertenaga" },
+    { name: "Toyota Yaris", price: "Rp 420.000", category: "Hatchback", seats: 5, transmission: "Automatic", fuel: "Bensin", image: "/assets/yaris2.jpg", desc: "Sporty dan modern" },
+    { name: "Honda Mobilio", price: "Rp 400.000", category: "MPV", seats: 7, transmission: "Manual", fuel: "Bensin", image: "/assets/mobilio.jpg", desc: "Lega untuk keluarga" },
+    { name: "Toyota Avanza", price: "Rp 450.000", category: "MPV", seats: 7, transmission: "Manual", fuel: "Bensin", image: "/assets/avanza.jpg", desc: "MPV terpopuler Indonesia" },
+    { name: "Daihatsu Xenia", price: "Rp 420.000", category: "MPV", seats: 7, transmission: "Manual", fuel: "Bensin", image: "/assets/xenia.jpg", desc: "Andalan keluarga Indonesia" },
+    { name: "Toyota Innova Reborn", price: "Rp 550.000", category: "MPV", seats: 7, transmission: "Automatic", fuel: "Diesel", image: "/assets/inova.jpg", desc: "Nyaman untuk perjalanan jauh" },
+    { name: "Mitsubishi Xpander", price: "Rp 480.000", category: "MPV", seats: 7, transmission: "Automatic", fuel: "Bensin", image: "/assets/xpander.jpg", desc: "Modern dan lapang" },
+    { name: "Honda CR-V", price: "Rp 700.000", category: "SUV", seats: 7, transmission: "Automatic", fuel: "Bensin", image: "/assets/crv.jpg", desc: "SUV premium dan elegan" },
+    { name: "Toyota Fortuner", price: "Rp 750.000", category: "SUV", seats: 7, transmission: "Automatic", fuel: "Diesel", image: "/assets/fortuner.jpg", desc: "Tangguh di segala medan" },
+    { name: "Mitsubishi Pajero Sport", price: "Rp 800.000", category: "SUV", seats: 7, transmission: "Automatic", fuel: "Diesel", image: "/assets/pajero.jpg", desc: "Siap untuk petualangan" },
+    { name: "Toyota Alphard", price: "Rp 1.500.000", category: "Luxury", seats: 7, transmission: "Automatic", fuel: "Bensin", image: "/assets/alphard.jpg", desc: "Kenyamanan kelas bisnis" },
+    { name: "Toyota Hiace", price: "Rp 900.000", category: "Van", seats: 14, transmission: "Manual", fuel: "Diesel", image: "/assets/hiace.jpg", desc: "Ideal untuk rombongan" },
   ];
 
   const categories = ["Semua", "City Car", "Hatchback", "MPV", "SUV", "Luxury", "Van"];
@@ -39,40 +40,13 @@ const ArmadaPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white shadow-sm sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <Car className="w-8 h-8 text-blue-600" />
-              <span className="text-2xl font-bold text-gray-900">SewaMobilin</span>
-            </div>
-            <nav className="hidden md:flex space-x-8">
-              <Link href="/" className="text-gray-600 hover:text-blue-600 transition-colors">
-                Home
-              </Link>
-              <Link href="#armada" className="text-blue-600 font-semibold">
-                Armada
-              </Link>
-              <Link href="/#tentang" className="text-gray-600 hover:text-blue-600 transition-colors">
-                Tentang
-              </Link>
-              <Link href="/#kontak" className="text-gray-600 hover:text-blue-600 transition-colors">
-                Kontak
-              </Link>
-            </nav>
-            <button onClick={scrollToContact} className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg transition-all">
-              Hubungi Kami
-            </button>
-          </div>
-        </div>
-      </header>
+      <Navbar />
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-blue-600 to-blue-400 text-white py-16">
+      <section className="bg-gradient-to-r from-blue-600 to-blue-400 text-white pt-24 pb-16 ">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold mb-4">Armada Lengkap Kami</h1>
-          <p className="text-xl text-blue-100 mb-6">Pilih dari 15+ mobil berkualitas untuk setiap kebutuhan perjalanan Anda</p>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">Armada Lengkap Kami</h1>
+          <p className="text-xl text-blue-100 mb-6">Pilih dari {cars.length}+ mobil berkualitas untuk setiap kebutuhan perjalanan Anda</p>
           <div className="flex items-center justify-center space-x-2 text-sm">
             <span className="bg-white/20 px-4 py-2 rounded-full">✓ Terawat Rutin</span>
             <span className="bg-white/20 px-4 py-2 rounded-full">✓ Asuransi Lengkap</span>
@@ -82,11 +56,11 @@ const ArmadaPage = () => {
       </section>
 
       {/* Filter Section */}
-      <section className="py-8 bg-white shadow-sm" id="armada">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-8 bg-white flex justify-center shadow-sm" id="armada">
+        <div className="max-w-2xl md:max-w-7xl   px-4 sm:px-6 lg:px-8">
           {/* Search Bar */}
           <div className="mb-6">
-            <div className="relative max-w-md mx-auto md:mx-0">
+            <div className="relative max-w-xl mx-auto md:mx-0">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
               <input
                 type="text"
@@ -99,7 +73,7 @@ const ArmadaPage = () => {
           </div>
 
           {/* Category Filter */}
-          <div className="flex items-center space-x-2 overflow-x-auto pb-2">
+          <div className="flex flex-wrap gap-4 items-center space-x-2 overflow-x-auto pb-2">
             <Filter className="w-5 h-5 text-gray-600 flex-shrink-0" />
             {categories.map((category) => (
               <button
@@ -124,7 +98,7 @@ const ArmadaPage = () => {
             {filteredCars.map((car, index) => (
               <div key={index} className="bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden group">
                 {/* Image */}
-                <div className="bg-gradient-to-br from-blue-100 to-blue-50 h-48 flex items-center justify-center text-7xl group-hover:scale-110 transition-transform duration-300">{car.image}</div>
+                <Image src={car.image} alt={car.name} width={500} height={100} className="h-72 w-full   object-cover " />
 
                 {/* Content */}
                 <div className="p-6">
@@ -182,7 +156,7 @@ const ArmadaPage = () => {
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">Sudah Menemukan Mobil Impian?</h2>
           <p className="text-xl text-blue-100 mb-8">Hubungi kami sekarang untuk reservasi dan penawaran terbaik!</p>
           <button onClick={scrollToContact} className="bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold py-4 px-12 rounded-lg text-xl transition-all transform hover:scale-105 shadow-xl">
-            💬 Hubungi Kami Sekarang
+            <FaWhatsapp size={32} className="inline-block" /> Hubungi Kami Sekarang
           </button>
         </div>
       </section>

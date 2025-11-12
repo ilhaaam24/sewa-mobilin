@@ -1,10 +1,11 @@
 "use client";
-import { Car, Shield, Clock, DollarSign, Star, Phone, Mail, MapPin, ChevronRight } from "lucide-react";
+import { Car, Shield, Clock, DollarSign, Star, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import { event as gaEvent } from "../lib/gtag";
 import { Navbar } from "../app/components/Navbar";
 import { FaWhatsapp } from "react-icons/fa";
 import Link from "next/link";
+import { Footer } from "./components/Footer";
 
 const Home = () => {
   const trackAndScroll = (label: string, id: string) => {
@@ -23,9 +24,9 @@ const Home = () => {
   };
 
   const cars = [
-    { name: "Honda Brio", price: "Rp 300.000", image: "/assets/armada-2.jpg", desc: "Hemat & lincah untuk kota" },
-    { name: "Innova Reborn", price: "Rp 550.000", image: "/assets/armada-3.jpg", desc: "Nyaman untuk keluarga" },
-    { name: "Pajero Sport", price: "Rp 800.000", image: "/assets/armada-4.jpg", desc: "Siap untuk perjalanan jauh" },
+    { name: "Honda Brio", price: "Rp 300.000", image: "/assets/brio.jpg", desc: "Hemat & lincah untuk kota" },
+    { name: "Innova Reborn", price: "Rp 550.000", image: "/assets/inova.jpg", desc: "Nyaman untuk keluarga" },
+    { name: "Pajero Sport", price: "Rp 800.000", image: "/assets/pajero.jpg", desc: "Siap untuk perjalanan jauh" },
   ];
 
   const testimonials = [
@@ -188,66 +189,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12" id="kontak">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div>
-              <div className="flex items-center space-x-2 mb-4">
-                <Car className="w-8 h-8 text-blue-400" />
-                <span className="text-2xl font-bold">SewaMobilin</span>
-              </div>
-              <p className="text-gray-400">Sewa mobil jadi lebih simpel.</p>
-            </div>
-
-            <div>
-              <h3 className="text-lg font-bold mb-4">Menu</h3>
-              <ul className="space-y-2">
-                {["Home", "Armada", "Tentang", "Kontak"].map((item) => (
-                  <li key={item}>
-                    <a href={`#${item.toLowerCase()}`} className="text-gray-400 hover:text-white transition-colors">
-                      {item}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="text-lg font-bold mb-4">Kontak</h3>
-              <ul className="space-y-3">
-                <li className="flex items-center space-x-2">
-                  <Phone className="w-5 h-5 text-blue-400" />
-                  <span className="text-gray-400">0812-3456-7890</span>
-                </li>
-                <li className="flex items-center space-x-2">
-                  <Mail className="w-5 h-5 text-blue-400" />
-                  <span className="text-gray-400">info@sewamobilin.com</span>
-                </li>
-                <li className="flex items-center space-x-2">
-                  <MapPin className="w-5 h-5 text-blue-400" />
-                  <span className="text-gray-400">Jakarta, Indonesia</span>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="text-lg font-bold mb-4">Ikuti Kami</h3>
-              <div className="flex space-x-4">
-                {["Instagram", "TikTok", "WhatsApp"].map((social) => (
-                  <a key={social} href="#" className="bg-gray-800 hover:bg-blue-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors">
-                    <span className="text-xs">{social[0]}</span>
-                  </a>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; 2025 SewaMobilin. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };

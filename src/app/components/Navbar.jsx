@@ -17,7 +17,7 @@ export const Navbar = () => {
   const navLinks = [
     {
       name: "Home",
-      link: "/#home",
+      link: "/",
     },
     {
       name: "Armada",
