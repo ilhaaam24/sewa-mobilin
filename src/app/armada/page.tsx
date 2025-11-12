@@ -91,7 +91,7 @@ const ArmadaPage = () => {
     <div className="min-h-screen bg-gray-50">
       <Navbar />
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-blue-600 to-blue-400 text-white pt-24 pb-16">
+      <section className="bg-gradient-to-r from-black to-gray-700 text-white pt-28 pb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.h1 className="text-4xl md:text-5xl font-bold mb-4" variants={heroVariants} initial="hidden" animate="visible">
             Armada Lengkap Kami
