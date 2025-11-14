@@ -3,6 +3,8 @@ import { Car, Users, Fuel, Settings, ChevronRight, Filter, Search } from "lucide
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Navbar } from "../components/Navbar";
+import { Footer } from "../components/Footer";
+import WhatsappButton from "../components/WhatsappButton";
 
 const ArmadaPage = () => {
   const [selectedCategory, setSelectedCategory] = useState("Semua");
@@ -90,6 +92,7 @@ const ArmadaPage = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <Navbar />
+      <WhatsappButton />
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-black to-gray-700 text-white pt-28 pb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -232,7 +235,7 @@ const ArmadaPage = () => {
       </section>
 
       {/* CTA Section */}
-      <motion.section className="py-16 bg-gradient-to-r from-blue-600 to-blue-400" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
+      <motion.section className="py-16 bg-gradient-to-r from-black to-gray-700" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.h2 className="text-3xl md:text-5xl font-bold text-white mb-4" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2, duration: 0.6 }}>
             Sudah Menemukan Mobil Impian?
@@ -257,62 +260,7 @@ const ArmadaPage = () => {
         </div>
       </motion.section>
 
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-4 gap-8">
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
-              <div className="flex items-center space-x-2 mb-4">
-                <Car className="w-8 h-8 text-blue-400" />
-                <span className="text-2xl font-bold">SewaMobilin</span>
-              </div>
-              <p className="text-gray-400">Sewa mobil jadi lebih simpel.</p>
-            </motion.div>
-
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1, duration: 0.5 }}>
-              <h3 className="text-lg font-bold mb-4">Menu</h3>
-              <ul className="space-y-2">
-                {["Home", "Armada", "Tentang", "Kontak"].map((item) => (
-                  <li key={item}>
-                    <a href={item === "Home" ? "/" : `/#${item.toLowerCase()}`} className="text-gray-400 hover:text-white transition-colors">
-                      {item}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2, duration: 0.5 }}>
-              <h3 className="text-lg font-bold mb-4">Kontak</h3>
-              <ul className="space-y-3">
-                <li className="text-gray-400">📞 0812-3456-7890</li>
-                <li className="text-gray-400">✉️ info@sewamobilin.com</li>
-                <li className="text-gray-400">📍 Jakarta, Indonesia</li>
-              </ul>
-            </motion.div>
-
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3, duration: 0.5 }}>
-              <h3 className="text-lg font-bold mb-4">Ikuti Kami</h3>
-              <div className="flex space-x-4">
-                {["IG", "TT", "WA"].map((social) => (
-                  <motion.a
-                    key={social}
-                    href="#"
-                    className="bg-gray-800 hover:bg-blue-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors text-sm font-bold"
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    whileTap={{ scale: 0.9 }}>
-                    {social}
-                  </motion.a>
-                ))}
-              </div>
-            </motion.div>
-          </div>
-
-          <motion.div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.4, duration: 0.5 }}>
-            <p>&copy; 2025 SewaMobilin. All rights reserved.</p>
-          </motion.div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };

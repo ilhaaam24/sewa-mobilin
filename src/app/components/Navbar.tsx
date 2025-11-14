@@ -24,12 +24,8 @@ export const Navbar = () => {
       link: "/armada",
     },
     {
-      name: "Cara Kerja",
-      link: "/#cara-kerja",
-    },
-    {
-      name: "Testimoni",
-      link: "/#testimoni",
+      name: "Tentang Kami",
+      link: "/tentang-kami",
     },
   ];
 
@@ -59,9 +55,9 @@ export const Navbar = () => {
       {isMenuOpen && (
         <div className="md:hidden bg-white shadow-lg">
           <div className="px-4 py-4 space-y-3">
-            {["Home", "Armada", "Tentang", "Kontak"].map((item) => (
-              <a key={item} href={`#${item.toLowerCase()}`} className="block text-gray-700 hover:text-blue-600 font-medium">
-                {item}
+            {navLinks.map((item) => (
+              <a key={item.name} href={`${item.link.toLowerCase()}`} className="block text-gray-700 hover:text-blue-600 font-medium">
+                {item.name}
               </a>
             ))}
           </div>

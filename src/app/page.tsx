@@ -6,6 +6,7 @@ import { Navbar } from "../app/components/Navbar";
 import { FaWhatsapp } from "react-icons/fa";
 import Link from "next/link";
 import { Footer } from "./components/Footer";
+import WhatsappButton from "./components/WhatsappButton";
 
 const Home = () => {
   const trackAndScroll = (label: string, id: string) => {
@@ -36,8 +37,9 @@ const Home = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white relative  ">
       <Navbar />
+      <WhatsappButton />
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <Image src={"/assets/hero-image.jpg"} alt="Hero Image" fill priority className="absolute inset-0 object-cover" />
@@ -109,7 +111,7 @@ const Home = () => {
 
           <div className="text-center mt-12">
             <button onClick={() => trackAndScroll("how_it_works_mulai", "kontak")} className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-12 rounded-lg text-lg transition-all transform hover:scale-105 shadow-xl">
-              🚀 Mulai Sekarang
+              Mulai Sekarang
             </button>
           </div>
         </div>
@@ -179,10 +181,10 @@ const Home = () => {
       </section>
 
       {/* CTA Final Section */}
-      <section className="py-20 bg-linear-to-r from-blue-600 to-blue-400">
+      <section className="py-20  ">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Siap Jalan Sekarang?</h2>
-          <p className="text-xl text-blue-100 mb-8">Temukan mobil impianmu dan nikmati pengalaman sewa tanpa stres.</p>
+          <h2 className="text-4xl md:text-5xl font-bold text-black mb-6">Siap Jalan Sekarang?</h2>
+          <p className="text-xl text-gray-500 mb-8">Temukan mobil impianmu dan nikmati pengalaman sewa tanpa stres.</p>
           <button onClick={() => trackAndScroll("final_cta_pesan", "kontak")} className="bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold py-4 px-12 rounded-lg text-xl transition-all transform hover:scale-105 shadow-xl">
             <FaWhatsapp size={32} className=" inline-block mr-2" /> Pesan Mobil Sekarang
           </button>

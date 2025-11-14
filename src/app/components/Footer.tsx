@@ -7,7 +7,6 @@ export const Footer = () => {
         <div className="grid md:grid-cols-4 gap-8">
           <div>
             <div className="flex items-center space-x-2 mb-4">
-              <Car className="w-8 h-8 text-blue-400" />
               <span className="text-2xl font-bold">SewaMobilin</span>
             </div>
             <p className="text-gray-400">Sewa mobil jadi lebih simpel.</p>
